@@ -1,0 +1,79 @@
+package co.pextra.fraud;
+
+import java.util.List;
+
+import br.ufes.inf.lprm.scene.model.impl.Situation;
+import br.ufes.inf.lprm.scene.util.SituationHelper;
+
+declare SuspiciousSituation extends Situation
+    client: Client
+    transactions: List
+end
+
+rule "More than 10 transactions in an hour from one client"
+@role(situation)
+@type(SuspiciousSituation)
+    when
+     client : Client()
+     transactions: List(size > 10) from accumulate(
+        $tran: TransactionEvent(customerId == client.id) over window:time (1h),
+        collectList($tran)
+     )
+     then
+        SituationHelper.situationDetected(drools);
+
+        //SuspiciousActivity suspiciousActivity = new SuspiciousActivity($client, $trans, "More than 10 transactions in an hour from one client");
+        //insert(suspiciousActivity);
+end
+
+rule "More than 1 transaction of 200 dollars in an hour from the same client"
+    when
+      $client: Client()
+      $trans: List(size > 1) from accumulate(
+        $tran: TransactionEvent(customerId == $client.id, totalAmount > 200) over window:time (1h),
+        collectList($tran)
+      )
+    then
+      SuspiciousActivity suspiciousActivity = new SuspiciousActivity($client, $trans,"More than 1 transaction of 200 dollars in an hour from the same client");
+      insert(suspiciousActivity);
+      System.out.println(suspiciousActivity);
+end
+
+
+rule "More than 10 transactions in an hour from small client portal"
+    when
+      $client: Client()
+      $trans: List(size > 10) from accumulate(
+        $tran: TransactionEvent(customerId == $client.id) over window:time (1h) from entry-point "small client",
+        collectList($tran)
+      )
+    then
+      SuspiciousActivity suspiciousActivity = new SuspiciousActivity($client, $trans, "More than 10 transactions in an hour from small client portal");
+      insert(suspiciousActivity);
+      System.out.println(suspiciousActivity);
+end
+
+
+rule "More than 100 transactions in an hour from big client portal"
+    when
+      $client: Client()
+      $trans: List(size > 100) from accumulate(
+        $tran: TransactionEvent(customerId == $client.id) over window:time (1h) from entry-point "big client",
+        collectList($tran)
+      )
+    then
+      SuspiciousActivity suspiciousActivity = new SuspiciousActivity($client, $trans, "More than 100 transactions in an hour from big client portal");
+      insert(suspiciousActivity);
+      System.out.println(suspiciousActivity);
+end
+
+rule "More than 3 suspicious cases in the day and we warn the owner"
+    when
+      c: Client()
+      suspiciousActivities: List(size > 0) from accumulate (
+        activity: SuspiciousActivity(client == c) over window:time (1h),
+        collectList(activity)
+      )
+     then
+       System.out.println("suspeeeeito em");
+end

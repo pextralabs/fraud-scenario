@@ -1,0 +1,356 @@
+17:29:40,102  INFO ClasspathKieProject:131 - Found kmodule: file:/home/bernardosunderhus/Documents/fraud-detection-scenario/target/classes/META-INF/kmodule.xml
+17:29:40,107 DEBUG ClasspathKieProject:400 - KieModule URL type=file url=/home/bernardosunderhus/Documents/fraud-detection-scenario/target/classes
+17:29:40,428  WARN ClasspathKieProject:289 - Unable to find pom.properties in /home/bernardosunderhus/Documents/fraud-detection-scenario/target/classes
+17:29:40,449  INFO ClasspathKieProject:331 - Recursed up folders, found and used pom.xml /home/bernardosunderhus/Documents/fraud-detection-scenario/pom.xml
+17:29:40,451 DEBUG ClasspathKieProject:118 - Discovered classpath module co.pextra:fraud-detection-scenario:1.0-SNAPSHOT
+17:29:40,460  INFO KieRepositoryImpl:113 - KieModule was added: FileKieModule[releaseId=co.pextra:fraud-detection-scenario:1.0-SNAPSHOT,file=/home/bernardosunderhus/Documents/fraud-detection-scenario/target/classes]
+17:29:40,461  INFO ClasspathKieProject:131 - Found kmodule: jar:file:/home/bernardosunderhus/.m2/repository/br/ufes/inf/lprm/scene-core/1.1.1/scene-core-1.1.1.jar!/META-INF/kmodule.xml
+17:29:40,467 DEBUG ClasspathKieProject:400 - KieModule URL type=jar url=/home/bernardosunderhus/.m2/repository/br/ufes/inf/lprm/scene-core/1.1.1/scene-core-1.1.1.jar
+17:29:40,477  WARN ClasspathKieProject:261 - Unable to find pom.properties in /home/bernardosunderhus/.m2/repository/br/ufes/inf/lprm/scene-core/1.1.1/scene-core-1.1.1.jar
+17:29:40,477  WARN ClasspathKieProject:231 - Unable to load pom.properties from/home/bernardosunderhus/.m2/repository/br/ufes/inf/lprm/scene-core/1.1.1/scene-core-1.1.1.jar
+17:29:40,477  WARN ClasspathKieProject:185 - Cannot find maven pom properties for this project. Using the container's default ReleaseId
+17:29:40,485 DEBUG ClasspathKieProject:118 - Discovered classpath module org.default:artifact:1.0.0-SNAPSHOT
+17:29:40,485  INFO KieRepositoryImpl:113 - KieModule was added: ZipKieModule[releaseId=org.default:artifact:1.0.0-SNAPSHOT,file=/home/bernardosunderhus/.m2/repository/br/ufes/inf/lprm/scene-core/1.1.1/scene-core-1.1.1.jar]
+17:29:42,933  INFO RuleTest:58 - Creating kieBase
+17:29:42,985 DEBUG KnowledgeBaseImpl:196 - Starting Engine in PHREAK mode
+17:29:43,099  INFO RuleTest:64 - There should be rules: 
+17:29:43,100  INFO RuleTest:67 - kp [Package name=br.ufes.inf.lprm.scene.base] rule OnGoingSituation
+17:29:43,101  INFO RuleTest:67 - kp [Package name=br.ufes.inf.lprm.scene.base] rule SituationType
+17:29:43,101  INFO RuleTest:67 - kp [Package name=br.ufes.inf.lprm.scene.base] rule SituationActivation
+17:29:43,101  INFO RuleTest:67 - kp [Package name=br.ufes.inf.lprm.scene.base] rule SituationDeactivation
+17:29:43,101  INFO RuleTest:67 - kp [Package name=co.pextra.fraud] rule will execute per each Measurement having ID color
+17:29:43,101  INFO RuleTest:67 - kp [Package name=co.pextra.fraud] rule More than 10 transactions in an hour from one client
+17:29:43,101  INFO RuleTest:67 - kp [Package name=co.pextra.fraud] rule More than 1 transaction of 200 dollars in an hour from the same client
+17:29:43,102  INFO RuleTest:67 - kp [Package name=co.pextra.fraud] rule More than 10 transactions in an hour from small client portal
+17:29:43,102  INFO RuleTest:67 - kp [Package name=co.pextra.fraud] rule More than 100 transactions in an hour from big client portal
+17:29:43,102  INFO RuleTest:67 - kp [Package name=co.pextra.fraud] rule More than 3 suspicious cases in the day and we warn the owner
+17:29:43,102  INFO RuleTest:71 - Creating kieSession
+17:29:43,218 DEBUG Reflections:186 - going to scan these urls:
+file:/home/bernardosunderhus/.jenv/candidates/java/1.8.0_77/jre/lib/rt.jar
+file:/home/bernardosunderhus/.m2/repository/org/kie/kie-internal/6.5.0.Final/kie-internal-6.5.0.Final.jar
+file:/home/bernardosunderhus/.jenv/candidates/java/1.8.0_77/jre/lib/ext/sunec.jar
+file:/home/bernardosunderhus/.jenv/candidates/java/1.8.0_77/jre/lib/charsets.jar
+file:/home/bernardosunderhus/.m2/repository/log4j/log4j/1.2.17/log4j-1.2.17.jar
+file:/home/bernardosunderhus/.jenv/candidates/java/1.8.0_77/jre/lib/ext/zipfs.jar
+file:/home/bernardosunderhus/.jenv/candidates/java/1.8.0_77/jre/lib/ext/sunpkcs11.jar
+file:/home/bernardosunderhus/.m2/repository/org/scala-lang/scala-library/2.11.7/scala-library-2.11.7.jar
+file:/home/bernardosunderhus/.m2/repository/org/mvel/mvel2/2.2.8.Final/mvel2-2.2.8.Final.jar
+file:/home/bernardosunderhus/.jenv/candidates/java/1.8.0_77/jre/lib/deploy.jar
+file:/home/bernardosunderhus/.m2/repository/org/slf4j/slf4j-log4j12/1.7.2/slf4j-log4j12-1.7.2.jar
+file:/home/bernardosunderhus/.m2/repository/org/slf4j/slf4j-api/1.7.2/slf4j-api-1.7.2.jar
+file:/home/bernardosunderhus/.m2/repository/xmlpull/xmlpull/1.1.3.1/xmlpull-1.1.3.1.jar
+file:/home/bernardosunderhus/.m2/repository/org/drools/drools-core/6.5.0.Final/drools-core-6.5.0.Final.jar
+file:/home/bernardosunderhus/.m2/repository/org/kie/kie-api/6.5.0.Final/kie-api-6.5.0.Final.jar
+file:/home/bernardosunderhus/.jenv/candidates/java/1.8.0_77/jre/lib/javaws.jar
+file:/home/bernardosunderhus/.m2/repository/org/hamcrest/hamcrest-core/1.3/hamcrest-core-1.3.jar
+file:/home/bernardosunderhus/.m2/repository/com/google/guava/guava/15.0/guava-15.0.jar
+file:/home/bernardosunderhus/.jenv/candidates/java/1.8.0_77/jre/lib/ext/dnsns.jar
+file:/home/bernardosunderhus/.jenv/candidates/java/1.8.0_77/jre/lib/ext/localedata.jar
+file:/home/bernardosunderhus/.m2/repository/org/drools/drools-compiler/6.5.0.Final/drools-compiler-6.5.0.Final.jar
+file:/home/bernardosunderhus/.m2/repository/br/ufes/inf/lprm/scene-core/1.1.1/scene-core-1.1.1.jar
+file:/home/bernardosunderhus/.m2/repository/com/thoughtworks/xstream/xstream/1.4.9/xstream-1.4.9.jar
+file:/home/bernardosunderhus/.m2/repository/org/reflections/reflections/0.9.10/reflections-0.9.10.jar
+file:/home/bernardosunderhus/.m2/repository/commons-codec/commons-codec/1.4/commons-codec-1.4.jar
+file:/home/bernardosunderhus/.jenv/candidates/java/1.8.0_77/jre/lib/ext/sunjce_provider.jar
+file:/home/bernardosunderhus/Documents/fraud-detection-scenario/target/test-classes/
+file:/home/bernardosunderhus/.m2/repository/xpp3/xpp3_min/1.1.4c/xpp3_min-1.1.4c.jar
+file:/home/bernardosunderhus/.jenv/candidates/java/1.8.0_77/jre/lib/jfr.jar
+file:/home/bernardosunderhus/.jenv/candidates/java/1.8.0_77/jre/lib/jce.jar
+file:/home/bernardosunderhus/.m2/repository/org/eclipse/jdt/core/compiler/ecj/4.4.2/ecj-4.4.2.jar
+file:/home/bernardosunderhus/.jenv/candidates/java/1.8.0_77/jre/lib/ext/nashorn.jar
+file:/home/bernardosunderhus/.m2/repository/org/javassist/javassist/3.19.0-GA/javassist-3.19.0-GA.jar
+file:/home/bernardosunderhus/Documents/fraud-detection-scenario/target/classes/
+file:/home/bernardosunderhus/.jenv/candidates/java/1.8.0_77/jre/lib/resources.jar
+file:/home/bernardosunderhus/.m2/repository/joda-time/joda-time/2.3/joda-time-2.3.jar
+file:/home/bernardosunderhus/.jenv/candidates/java/1.8.0_77/jre/lib/jfxswt.jar
+file:/home/bernardosunderhus/.jenv/candidates/java/1.8.0_77/jre/lib/ext/jaccess.jar
+file:/home/bernardosunderhus/.jenv/candidates/java/1.8.0_77/jre/lib/ext/cldrdata.jar
+file:/home/bernardosunderhus/.m2/repository/junit/junit/4.12/junit-4.12.jar
+file:/home/bernardosunderhus/.m2/repository/br/ufes/inf/lprm/situation-model/1.0.0/situation-model-1.0.0.jar
+file:/home/bernardosunderhus/Downloads/idea-IU-171.3780.107/plugins/junit/lib/junit-rt.jar
+file:/home/bernardosunderhus/.m2/repository/com/google/code/findbugs/annotations/2.0.1/annotations-2.0.1.jar
+file:/home/bernardosunderhus/.jenv/candidates/java/1.8.0_77/jre/lib/ext/jfxrt.jar
+file:/home/bernardosunderhus/.m2/repository/com/google/protobuf/protobuf-java/2.6.0/protobuf-java-2.6.0.jar
+file:/home/bernardosunderhus/.m2/repository/org/antlr/antlr-runtime/3.5/antlr-runtime-3.5.jar
+file:/home/bernardosunderhus/.jenv/candidates/java/1.8.0_77/jre/lib/plugin.jar
+file:/home/bernardosunderhus/.jenv/candidates/java/1.8.0_77/jre/lib/jsse.jar
+file:/home/bernardosunderhus/Downloads/idea-IU-171.3780.107/lib/idea_rt.jar
+file:/home/bernardosunderhus/.jenv/candidates/java/1.8.0_77/jre/lib/management-agent.jar
+file:/home/bernardosunderhus/.m2/repository/com/google/code/gson/gson/2.7/gson-2.7.jar
+17:29:43,665  INFO Reflections:229 - Reflections took 445 ms to scan 51 urls, producing 324 keys and 1571 values 
+17:29:43,676 DEBUG Reflections:186 - going to scan these urls:
+jar:file:/home/bernardosunderhus/.m2/repository/br/ufes/inf/lprm/scene-core/1.1.1/scene-core-1.1.1.jar!/
+17:29:43,677  INFO Reflections:229 - Reflections took 1 ms to scan 1 urls, producing 4 keys and 4 values 
+17:29:43,678 DEBUG Reflections:186 - going to scan these urls:
+jar:file:/home/bernardosunderhus/.m2/repository/br/ufes/inf/lprm/scene-core/1.1.1/scene-core-1.1.1.jar!/
+17:29:43,684 DEBUG Reflections:254 - could not scan file br/ufes/inf/lprm/scene/base/SituationBaseRules.drl in url jar:file:/home/bernardosunderhus/.m2/repository/br/ufes/inf/lprm/scene-core/1.1.1/scene-core-1.1.1.jar!/ with scanner TypeAnnotationsScanner
+17:29:43,685 DEBUG Reflections:254 - could not scan file br/ufes/inf/lprm/scene/base/SituationBaseRules.drl in url jar:file:/home/bernardosunderhus/.m2/repository/br/ufes/inf/lprm/scene-core/1.1.1/scene-core-1.1.1.jar!/ with scanner SubTypesScanner
+17:29:43,686  INFO Reflections:229 - Reflections took 8 ms to scan 1 urls, producing 26 keys and 27 values 
+17:29:43,687 DEBUG Reflections:186 - going to scan these urls:
+jar:file:/home/bernardosunderhus/.m2/repository/br/ufes/inf/lprm/situation-model/1.0.0/situation-model-1.0.0.jar!/
+17:29:43,688  INFO Reflections:229 - Reflections took 0 ms to scan 1 urls, producing 3 keys and 4 values 
+17:29:43,690 DEBUG Reflections:186 - going to scan these urls:
+file:/home/bernardosunderhus/Documents/fraud-detection-scenario/target/test-classes/
+file:/home/bernardosunderhus/Documents/fraud-detection-scenario/target/classes/
+17:29:43,695  INFO Reflections:229 - Reflections took 3 ms to scan 2 urls, producing 5 keys and 7 values 
+17:29:43,696 DEBUG Reflections:186 - going to scan these urls:
+jar:file:/home/bernardosunderhus/.m2/repository/br/ufes/inf/lprm/scene-core/1.1.1/scene-core-1.1.1.jar!/
+17:29:43,701  INFO Reflections:229 - Reflections took 1 ms to scan 1 urls, producing 5 keys and 5 values 
+17:29:43,703 DEBUG Reflections:186 - going to scan these urls:
+jar:file:/home/bernardosunderhus/.m2/repository/br/ufes/inf/lprm/situation-model/1.0.0/situation-model-1.0.0.jar!/
+17:29:43,704  INFO Reflections:229 - Reflections took 0 ms to scan 1 urls, producing 2 keys and 3 values 
+17:29:43,711  INFO RuleTest:81 - Now running data
+17:29:43,714 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.Client@1e6cc850
+17:29:43,727 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@7a344b65
+17:29:43,728 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@57aa341b
+17:29:43,728 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@26e412ef
+17:29:43,728 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@4ae263bf
+17:29:43,729 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@7103ab0
+17:29:43,729 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@19ccca5
+17:29:43,729 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@769d513
+17:29:43,730 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@5e4fa1da
+17:29:43,730 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@588cd519
+17:29:43,730 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@3f92c349
+17:29:43,730 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@769a58e5
+17:29:43,731 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.Client@55f8669d
+17:29:43,731 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@6be25526
+17:29:43,731 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@42435b98
+17:29:43,732 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@66ba7e45
+17:29:43,732 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@70e02081
+17:29:43,732 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.Client@9d200de
+17:29:43,733 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@511505e7
+17:29:43,733 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@15fdd1f2
+17:29:43,735 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@cb0f763
+17:29:43,735 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@7573e12f
+17:29:43,736 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@51b1a8f6
+17:29:43,736 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@2a389173
+17:29:43,736 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@213860b8
+17:29:43,737 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@4ba89729
+17:29:43,737 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@178270b2
+17:29:43,742 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@795fd838
+17:29:43,742 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@1b005a0b
+17:29:43,743 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@141e879d
+17:29:43,743 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@109d724c
+17:29:43,743 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@1704f67f
+17:29:43,743 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@e4d2696
+17:29:43,744 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@6e0f7aad
+17:29:43,744 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@15fb7a32
+17:29:43,745 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@257cc1fc
+17:29:43,745 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@42e22a53
+17:29:43,745 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@57adfab0
+17:29:43,746 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@1949309d
+17:29:43,746 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@5af97169
+17:29:43,746 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.Client@99a78d7
+17:29:43,747 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@31da6b2e
+17:29:43,753 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@61c76850
+17:29:43,753 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@70242f38
+17:29:43,755 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@2a22ad2b
+17:29:43,755 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@48c3205a
+17:29:43,756 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@121c54fa
+17:29:43,756 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@4390f46e
+17:29:43,756 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@7c6442c2
+17:29:43,757 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@2d746ce4
+17:29:43,757 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@5dbf5634
+17:29:43,758 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@1948ea69
+17:29:43,759 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@47e4d9d0
+17:29:43,763 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@49798e84
+17:29:43,764 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@6ed06f69
+17:29:43,764 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@3015db78
+17:29:43,765 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@515ebef3
+17:29:43,765 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@545607f2
+17:29:43,766 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@39109136
+17:29:43,768 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@27c04377
+17:29:43,768 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@34dc85a
+17:29:43,769 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@67403656
+17:29:43,773 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@5a6482a9
+17:29:43,774 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@7f9ab969
+17:29:43,774 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@12f8b1d8
+17:29:43,781 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@746cd757
+17:29:43,782 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@ae372b9
+17:29:43,782 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@2098d37d
+17:29:43,782 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@77b9d0c7
+17:29:43,782 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@65fd6708
+17:29:43,783 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@749ab7b4
+17:29:43,787 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@127f9161
+17:29:43,793 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@2bf94401
+17:29:43,793 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@2532b351
+17:29:43,794 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@4349754
+17:29:43,794 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@6a2eea2a
+17:29:43,794 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@b967222
+17:29:43,794 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@3b0ee03a
+17:29:43,795 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@1ba05e38
+17:29:43,795 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@6c298dc
+17:29:43,795 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@3e7dfd44
+17:29:43,795 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@723ed581
+17:29:43,795 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@6b760460
+17:29:43,796 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@796065aa
+17:29:43,798 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@28a6301f
+17:29:43,798 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@2c306a57
+17:29:43,799 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@773e2eb5
+17:29:43,799 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@d8948cd
+17:29:43,800 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@1436a7ab
+17:29:43,801 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@3b7b05a8
+17:29:43,801 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@3d36dff4
+17:29:43,801 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@7abe27bf
+17:29:43,802 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@5b94ccbc
+17:29:43,802 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@38a1c423
+17:29:43,802 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@336365bc
+17:29:43,802 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@38eb2fb0
+17:29:43,802 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@4567e53d
+17:29:43,803 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@7351a16e
+17:29:43,803 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@5bb7643d
+17:29:43,808 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@3ac04654
+17:29:43,809 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@4074023c
+17:29:43,809 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@3ed0918d
+17:29:43,813 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@5e268ce6
+17:29:43,813 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@66ec9390
+17:29:43,814 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@6e91893
+17:29:43,814 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@3c0fbd3a
+17:29:43,814 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@562457e1
+17:29:43,815 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@54562ea6
+17:29:43,816 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@1a35993f
+17:29:43,816 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@5b12012e
+17:29:43,816 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@2f7dcef2
+17:29:43,816 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@4a3be6a5
+17:29:43,817 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@7cf162bc
+17:29:43,817 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@3721177d
+17:29:43,817 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@766a4535
+17:29:43,818 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@63718b93
+17:29:43,818 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@14e2e1c3
+17:29:43,818 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@2b4786dd
+17:29:43,818 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@f202d6d
+17:29:43,819 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@60e21209
+17:29:43,819 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@630d1b2f
+17:29:43,819 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@746b18fd
+17:29:43,819 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@7a2e0858
+17:29:43,820 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@aac3f4e
+17:29:43,820 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@1f38957
+17:29:43,820 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@2df3c564
+17:29:43,829 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@2715644a
+17:29:43,830 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@4c2869a9
+17:29:43,830 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@518cf84a
+17:29:43,831 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@62e7dffa
+17:29:43,834 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@6edcd0d8
+17:29:43,835 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@6136998b
+17:29:43,836 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@57ce634f
+17:29:43,836 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@b8a7e43
+17:29:43,836 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@35835fa
+17:29:43,837 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@56f71edb
+17:29:43,845 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@7207cb51
+17:29:43,845 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@2a27cb34
+17:29:43,846 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@6892cc6f
+17:29:43,846 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@6fd1660
+17:29:43,846 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@4a6c18ad
+17:29:43,846 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@5e8604bf
+17:29:43,846 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@20095ab4
+17:29:43,846 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@4e2916c3
+17:29:43,847 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@64aad6db
+17:29:43,848 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@ae7950d
+17:29:43,848 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@60d1b21f
+17:29:43,848 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@66c83fc8
+17:29:43,856 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@546621c4
+17:29:43,857 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@621f89b8
+17:29:43,857 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@f339eae
+17:29:43,857 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@2822c6ff
+17:29:43,857 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@4dafba3e
+17:29:43,857 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@53e3a87a
+17:29:43,858 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@40368a46
+17:29:43,858 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@7e9da981
+17:29:43,858 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@4ed38226
+17:29:43,858 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@3d43fe
+17:29:43,858 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@74ad8d05
+17:29:43,859 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@676ff3b0
+17:29:43,859 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@35ff8fc9
+17:29:43,859 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@5fb7183b
+17:29:43,867 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@476a736d
+17:29:43,867 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@5f80fa43
+17:29:43,868 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@16c8b7bd
+17:29:43,868 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@7159139f
+17:29:43,868 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@65bcf7c2
+17:29:43,868 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@3db64bd4
+17:29:43,868 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@6e106680
+17:29:43,868 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@576c5536
+17:29:43,869 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@55ecbafe
+17:29:43,869 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@5a8ba37c
+17:29:43,869 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@37c2eacb
+17:29:43,876 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@232cce0
+17:29:43,876 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@32b9bd12
+17:29:43,876 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@352e787a
+17:29:43,876 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@159a48a6
+17:29:43,877 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@15bc339
+17:29:43,877 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@7e75bf2d
+17:29:43,877 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@385ef531
+17:29:43,877 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@7fc645e4
+17:29:43,877 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@205b132e
+17:29:43,877 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@73044cdf
+17:29:43,878 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@3cbcd8f3
+17:29:43,878 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@719843e5
+17:29:43,878 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@9a2ec9b
+17:29:43,878 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@58112bc4
+17:29:43,878 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@2301b75
+17:29:43,878 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@3104f7bd
+17:29:43,879 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@2f5c1332
+17:29:43,879 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@7ec25216
+17:29:43,879 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@7cab1508
+17:29:43,879 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@6a84bc3f
+17:29:43,879 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@258ee7de
+17:29:43,881 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@4930539b
+17:29:43,886 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@6d171ce0
+17:29:43,886 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@22bd2039
+17:29:43,887 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@705f83a7
+17:29:43,887 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@3bb8aabc
+17:29:43,892 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@6e1d4137
+17:29:43,894 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@256a1825
+17:29:43,895 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@29a4f594
+17:29:43,895 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@57b75756
+17:29:43,895 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@5327a06e
+17:29:43,895 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@2679311f
+17:29:43,899 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@287f7811
+17:29:43,899 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@451f87af
+17:29:43,899 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@2b556bb2
+17:29:43,899 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@44cb460e
+17:29:43,900 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@17271176
+17:29:43,900 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@2e3cdec2
+17:29:43,900 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@2e34384c
+17:29:43,901 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@3051e0b2
+17:29:43,902 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@1f52eb6f
+17:29:43,902 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@57d0fc89
+17:29:43,902 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@58294867
+17:29:43,904 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@67c277a0
+17:29:43,904 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@6fc3e1a4
+17:29:43,904 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@3fa76c61
+17:29:43,905 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@2d5f7182
+17:29:43,905 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@59546cfe
+17:29:43,905 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@29ea78b1
+17:29:43,909 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@2d2acd89
+17:29:43,910 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@7baf6acf
+17:29:43,910 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@1e6dad8
+17:29:43,910 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@7b3315a5
+17:29:43,911 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@8ed9cf
+17:29:43,911 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@f72203
+17:29:43,911 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@377008df
+17:29:43,915 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@540dbda9
+17:29:43,915 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@22bb5646
+17:29:43,916 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@1be59f28
+17:29:43,916 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@2ce45a7b
+17:29:43,916 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@153d4abb
+17:29:43,918 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@6d4c273c
+17:29:43,924 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@5a67e962
+17:29:43,925 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@545e57d7
+17:29:43,927 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@2bc9a775
+17:29:43,927 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@27b000f7
+17:29:43,927 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@42f9c19a
+17:29:43,927 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@64bfd6fd
+17:29:43,929 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@2ab2710
+17:29:43,929 DEBUG SCENELogger:20 - INSERT - co.pextra.fraud.TransactionEvent@253b380a
+17:29:43,929  INFO RuleTest:113 - Final checks
+17:29:43,993 DEBUG SCENELogger:17 - SITUATION ACTIVATION - TYPE: co.pextra.fraud.SuspiciousSituation	HASH: -1017059642	CAST: {}
+17:29:44,088 DEBUG SCENELogger:19 - 	Activation timestamp: 2017 04 29 17:29:44.
+17:29:44,090 DEBUG SCENELogger:20 - INSERT - SuspiciousSituation( client=null, transactions=null )
+17:29:44,097 DEBUG SCENELogger:25 - UPDATE - TYPE: co.pextra.fraud.SuspiciousSituation	HASH: -1017059642	CAST: {}
+17:29:44,138 DEBUG SCENELogger:20 - INSERT - Client:David Hasselhoft, Transactions Amount:2, description: More than 1 transaction of 200 dollars in an hour from the same client
+17:29:44,139 DEBUG SCENELogger:20 - INSERT - Client:John doe, Transactions Amount:2, description: More than 1 transaction of 200 dollars in an hour from the same client
+17:29:44,143 DEBUG SCENELogger:20 - INSERT - Client:Little fish, Transactions Amount:11, description: More than 10 transactions in an hour from small client portal
+17:29:44,145 DEBUG SCENELogger:20 - INSERT - Client:John doe, Transactions Amount:11, description: More than 10 transactions in an hour from small client portal
+17:29:44,152 DEBUG SCENELogger:20 - INSERT - Client:Big fish, Transactions Amount:101, description: More than 100 transactions in an hour from big client portal
+17:29:44,153 DEBUG SCENELogger:20 - INSERT - Client:John doe, Transactions Amount:101, description: More than 100 transactions in an hour from big client portal
