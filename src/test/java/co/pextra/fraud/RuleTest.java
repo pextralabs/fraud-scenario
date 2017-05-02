@@ -82,14 +82,14 @@ public class RuleTest {
 
         Client client1 = new Client("John doe", 1L);
         session.insert(client1);
-        for (int i = 0; i < 11; i++) {
+        for (int i = 0; i < 15; i++) {
             session.insert(new TransactionEvent(client1.getId(), 0.0));
         }
 
         Client client2 = new Client("David Hasselhoft", 2L);
         session.insert(client2);
         for (int i = 0; i < 2; i++) {
-            session.insert(new TransactionEvent(client2.getId(), 2001.0));
+//            session.insert(new TransactionEvent(client2.getId(), 2001.0));
             session.insert(new TransactionEvent(client1.getId(), 2001.0));
         }
 
@@ -98,7 +98,7 @@ public class RuleTest {
 
         EntryPoint smallClients = session.getEntryPoint("small client");
         for (int i = 0; i < 11; i++) {
-            smallClients.insert(new TransactionEvent(client3.getId(), 20.0));
+//            smallClients.insert(new TransactionEvent(client3.getId(), 20.0));
             smallClients.insert(new TransactionEvent(client1.getId(), 20.0));
         }
         Client client4 = new Client("Big fish", 4L);
@@ -106,7 +106,7 @@ public class RuleTest {
 
         EntryPoint bigClients = session.getEntryPoint("big client");
         for (int i = 0; i < 101; i++) {
-            bigClients.insert(new TransactionEvent(client4.getId(), 20.0));
+//            bigClients.insert(new TransactionEvent(client4.getId(), 20.0));
             bigClients.insert(new TransactionEvent(client1.getId(), 20.0));
         }
 
