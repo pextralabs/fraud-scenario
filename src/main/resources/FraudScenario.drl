@@ -70,10 +70,9 @@ rule "More than 3 suspicious cases in the day and we warn the owner"
     when
       c: Client()
       suspiciousSituation: List(size > 3) from accumulate (
-        sit: SuspiciousSituation(client == c)
-        Activation(situation = sit) over window:time (1h),
-        collectList(sit)
+        Activation($sit: situation, $sit isA SuspiciousSituation.class, ((SuspiciousSituation) $sit).client == c ) over window:time (1h);
+        collectList($sit)
       )
      then
-       System.out.println("suspeeeeito em");
+       System.out.println("WARNING! " + c.getName());
 end
