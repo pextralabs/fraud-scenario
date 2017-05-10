@@ -66,13 +66,27 @@ rule "More than 100 transactions in an hour from big client portal"
       SituationHelper.situationDetected(drools);
 end
 
-rule "More than 3 suspicious cases in the day and we warn the owner"
+//rule "More than 3 suspicious cases in the day and we warn the owner"
+//    when
+//      c: Client()
+//      suspiciousSituation: List(size > 3) from accumulate (
+//        Activation($sit: situation, $sit isA SuspiciousSituation.class, ((SuspiciousSituation) $sit).client == c ) over window:time (1h);
+//        collectList($sit)
+//      )
+//     then
+//       System.out.println("WARNING! " + c.getName());
+//end
+
+
+rule "Isaac é gay"
     when
-      c: Client()
-      suspiciousSituation: List(size > 3) from accumulate (
-        Activation($sit: situation, $sit isA SuspiciousSituation.class, ((SuspiciousSituation) $sit).client == c ) over window:time (1h);
-        collectList($sit)
-      )
-     then
-       System.out.println("WARNING! " + c.getName());
+        c: Client()
+        suspiciousSituations: List(size > 3) from accumulate (
+            $sit: SuspiciousSituation(client == c)
+            and
+            Activation(situation == $sit) over window:time (1h),
+            collectList($sit)
+        )
+        then
+            System.out.println("Warning! " + c.getName());
 end
