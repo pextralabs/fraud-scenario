@@ -18,7 +18,7 @@ rule "More than 10 transactions in an hour from one client"
     when
      client : Client()
      transactions: List(size > 10) from accumulate(
-        transaction: TransactionEvent(customerId == client.id) over window:time (1h),
+        transaction: Transaction(client == client) over window:time (1h),
         collectList(transaction)
      )
      then
@@ -31,7 +31,7 @@ rule "More than 1 transaction of 200 dollars in an hour from the same client"
     when
       client: Client()
       transactions: List(size > 1) from accumulate(
-        transaction: TransactionEvent(customerId == client.id, totalAmount > 200) over window:time (1h),
+        transaction: Transaction(client == client, amount > 200) over window:time (1h),
         collectList(transaction)
       )
     then
@@ -45,7 +45,7 @@ rule "More than 10 transactions in an hour from small client portal"
     when
       client: Client()
       transactions: List(size > 10) from accumulate(
-        transaction: TransactionEvent(customerId == client.id) over window:time (1h) from entry-point "small client",
+        transaction: Transaction(client == client) over window:time (1h) from entry-point "small client",
         collectList(transaction)
       )
     then
@@ -59,26 +59,14 @@ rule "More than 100 transactions in an hour from big client portal"
     when
       client: Client()
       transactions: List(size > 100) from accumulate(
-        transaction: TransactionEvent(customerId == client.id) over window:time (1h) from entry-point "big client",
+        transaction: Transaction(client == client) over window:time (1h) from entry-point "big client",
         collectList(transaction)
       )
     then
       SituationHelper.situationDetected(drools);
 end
 
-//rule "More than 3 suspicious cases in the day and we warn the owner"
-//    when
-//      c: Client()
-//      suspiciousSituation: List(size > 3) from accumulate (
-//        Activation($sit: situation, $sit isA SuspiciousSituation.class, ((SuspiciousSituation) $sit).client == c ) over window:time (1h);
-//        collectList($sit)
-//      )
-//     then
-//       System.out.println("WARNING! " + c.getName());
-//end
-
-
-rule "Isaac é gay"
+rule "More than 3 suspicious cases in the day and we warn the owner"
     when
         c: Client()
         suspiciousSituations: List(size > 3) from accumulate (

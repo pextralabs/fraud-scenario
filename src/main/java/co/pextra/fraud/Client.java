@@ -1,16 +1,21 @@
 package co.pextra.fraud;
 
+import java.util.UUID;
+
 /**
  * Created by bernardosunderhus on 29/04/17.
  */
 public class Client {
     private String name;
-    private Long id;
+    private UUID id;
+    private long balance;
 
-    public  Client(String name, Long id) {
+    public Client(String name, long balance) {
         this.name = name;
-        this.id = id;
+        this.id = UUID.randomUUID();
+        this.balance = balance;
     }
+
     public String getName() {
         return name;
     }
@@ -19,11 +24,15 @@ public class Client {
         this.name = name;
     }
 
-    public Long getId() {
-        return id;
+    public long getBalance() {
+        return balance;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setBalance(long balance) {
+        this.balance = balance;
+    }
+
+    public UUID getId() {
+        return id;
     }
 }

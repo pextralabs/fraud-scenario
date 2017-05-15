@@ -2,3 +2,6 @@
 /*.iml
 /target
 /*.log*
+/.vscode
+/.settings
+.classpath

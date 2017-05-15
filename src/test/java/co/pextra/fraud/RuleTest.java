@@ -15,15 +15,10 @@
 
 package co.pextra.fraud;
 
-import static org.junit.Assert.*;
-
-import java.util.HashSet;
-import java.util.Set;
-import java.util.concurrent.TimeUnit;
-
 import br.ufes.inf.lprm.scene.SceneApplication;
 import br.ufes.inf.lprm.scene.base.listeners.SCENESessionListener;
-import org.drools.core.time.SessionPseudoClock;
+
+// import org.apache.log4j.chainsaw.Main;
 import org.junit.Test;
 import org.kie.api.KieBase;
 import org.kie.api.KieBaseConfiguration;
@@ -35,8 +30,6 @@ import org.kie.api.definition.KiePackage;
 import org.kie.api.definition.rule.Rule;
 import org.kie.api.runtime.KieContainer;
 import org.kie.api.runtime.KieSession;
-import org.kie.api.runtime.KieSessionConfiguration;
-import org.kie.api.runtime.conf.ClockTypeOption;
 import org.kie.api.runtime.rule.EntryPoint;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -44,7 +37,6 @@ import org.slf4j.LoggerFactory;
 
 public class RuleTest {
     static final Logger LOG = LoggerFactory.getLogger(RuleTest.class);
-
     @Test
     public void test() {
         KieServices kieServices = KieServices.Factory.get();
@@ -71,7 +63,7 @@ public class RuleTest {
         LOG.info("Creating kieSession");
         KieSession session = kieBase.newKieSession();
 
-        SceneApplication app = new SceneApplication("fraud-scenario", session);
+        new SceneApplication("fraud-scenario", session);
 
         session.addEventListener(new SCENESessionListener());
 
@@ -83,41 +75,35 @@ public class RuleTest {
         Client client1 = new Client("John doe", 1L);
         session.insert(client1);
         for (int i = 0; i < 15; i++) {
-            session.insert(new TransactionEvent(client1.getId(), 0.0));
+            session.insert(new Transaction(client1, 0.0));
         }
-
-        Client client2 = new Client("David Hasselhoft", 2L);
+        Client client2 = new Client("David Hasselhoft", 1L);
         session.insert(client2);
         for (int i = 0; i < 2; i++) {
-//            session.insert(new TransactionEvent(client2.getId(), 2001.0));
-            session.insert(new TransactionEvent(client1.getId(), 2001.0));
+//            session.insert(new Transaction(client2.getId(), 2001.0));
+            session.insert(new Transaction(client1, 2001.0));
         }
 
-        Client client3 = new Client("Little fish", 3L);
+        Client client3 = new Client("Little fish", 1L);
         session.insert(client3);
 
         EntryPoint smallClients = session.getEntryPoint("small client");
         for (int i = 0; i < 11; i++) {
-//            smallClients.insert(new TransactionEvent(client3.getId(), 20.0));
-            smallClients.insert(new TransactionEvent(client1.getId(), 20.0));
+//            smallClients.insert(new Transaction(client3.getId(), 20.0));
+            smallClients.insert(new Transaction(client1, 20.0));
         }
-        Client client4 = new Client("Big fish", 4L);
+        Client client4 = new Client("Big fish",1L);
         session.insert(client4);
 
         EntryPoint bigClients = session.getEntryPoint("big client");
         for (int i = 0; i < 101; i++) {
-//            bigClients.insert(new TransactionEvent(client4.getId(), 20.0));
-            bigClients.insert(new TransactionEvent(client1.getId(), 20.0));
+//            bigClients.insert(new Transaction(client4.getId(), 20.0));
+            bigClients.insert(new Transaction(client1, 20.0));
         }
 
         LOG.info("Final checks");
 
         while(true);
-
-//        assertEquals("Size of object in Working Memory is 3", 3, session.getObjects().size());
-//        assertTrue("contains red", check.contains("red"));
-//        assertTrue("contains green", check.contains("green"));
-//        assertTrue("contains blue", check.contains("blue"));
 
     }
 }
