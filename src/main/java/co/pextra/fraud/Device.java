@@ -1,14 +1,9 @@
 package co.pextra.fraud;
 
 public class Device {
-    private AuthToken token;
     private Location currentLocation;
-    public Device(AuthToken token, Double latitude, Double longitude) {
-        this.token = token;
+    public Device(Double latitude, Double longitude) {
         currentLocation = new Location(latitude, longitude);
-    }
-    public AuthToken getToken() {
-        return token;
     }
     public Location getCurrentLocation() {
         return currentLocation;

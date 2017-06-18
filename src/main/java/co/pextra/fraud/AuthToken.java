@@ -7,10 +7,20 @@ import java.util.UUID;
  */
 public class AuthToken {
     private UUID token;
-    public AuthToken() {
+    private Device device;
+    private Client client;
+    public AuthToken(Device device, Client client) {
         token = UUID.randomUUID();
+        this.device = device;
+        this.client = client;
     }
     public UUID getToken() {
         return token;
+    }
+    public Device getDevice () {
+        return device;
+    }
+    public Client getClient () {
+        return client;
     }
 }

@@ -20,9 +20,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 
-public class RuleTest {
-    static final Logger LOG = LoggerFactory.getLogger(RuleTest.class);
-    // @Test
+public class FraudScenarioTest {
+    static final Logger LOG = LoggerFactory.getLogger(FraudScenarioTest.class);
+    @Test
     public void test() {
         KieServices kieServices = KieServices.Factory.get();
 
@@ -57,34 +57,12 @@ public class RuleTest {
 
         LOG.info("Now running data");
 
-        Client client1 = new Client("John doe", 1L);
+        Client client1 = new Client("client1", 10);
+        Device device1 = new Device(-20.3431336, -40.2864437);
+        AuthToken token1 = new AuthToken(device1, client1);
         session.insert(client1);
-        for (int i = 0; i < 15; i++) {
-            session.insert(new Transaction(client1, 0.0));
-        }
-        Client client2 = new Client("David Hasselhoft", 1L);
-        session.insert(client2);
-        for (int i = 0; i < 2; i++) {
-//            session.insert(new Transaction(client2.getId(), 2001.0));
-            session.insert(new Transaction(client1, 2001.0));
-        }
-
-        Client client3 = new Client("Little fish", 1L);
-        session.insert(client3);
-
-        EntryPoint smallClients = session.getEntryPoint("small client");
-        for (int i = 0; i < 11; i++) {
-//            smallClients.insert(new Transaction(client3.getId(), 20.0));
-            smallClients.insert(new Transaction(client1, 20.0));
-        }
-        Client client4 = new Client("Big fish",1L);
-        session.insert(client4);
-
-        EntryPoint bigClients = session.getEntryPoint("big client");
-        for (int i = 0; i < 101; i++) {
-//            bigClients.insert(new Transaction(client4.getId(), 20.0));
-            bigClients.insert(new Transaction(client1, 20.0));
-        }
+        session.insert(device1);
+        session.insert(token1);
 
         LOG.info("Final checks");
 
