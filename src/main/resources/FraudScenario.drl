@@ -9,6 +9,9 @@ import br.ufes.inf.lprm.situation.model.Participation;
 import br.ufes.inf.lprm.situation.model.SituationType
 import br.ufes.inf.lprm.scene.util.SituationHelper;
 
+/*
+* There is a current token binding a Client and a Device right now
+*/
 declare Session extends Situation
   token: AuthToken @part @key
   client: Client @part @key
@@ -21,6 +24,26 @@ rule Session
     client: Client()
     device: Device(location: currentLocation)
     token: AuthToken(this.client == client, this.device == device)
+  then
+    SituationHelper.situationDetected(drools);
+end
+
+/*
+* There were two Sessions within the last hour in locations with more than 10000
+* kilometers apart
+*/
+declare DoubleSessionLocation extends Situation
+  client: Client @part @key
+  firstSession: Session @part
+  secondSession: Session @part
+end
+rule DoubleSessionLocation
+@role(situation)
+@type(DoubleSessionLocation)
+  when
+    client: Client()
+    firstSession: Session(this.client == client)
+	  secondSession: Session(this.client == client, this overlappedby firstSession || this after [1h] firstSession)
   then
     SituationHelper.situationDetected(drools);
 end

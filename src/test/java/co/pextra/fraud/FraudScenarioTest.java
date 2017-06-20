@@ -15,7 +15,7 @@ import org.kie.api.definition.KiePackage;
 import org.kie.api.definition.rule.Rule;
 import org.kie.api.runtime.KieContainer;
 import org.kie.api.runtime.KieSession;
-import org.kie.api.runtime.rule.EntryPoint;
+// import org.kie.api.runtime.rule.EntryPoint;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -59,10 +59,19 @@ public class FraudScenarioTest {
 
         Client client1 = new Client("client1", 10);
         Device device1 = new Device(-20.3431336, -40.2864437);
+        Device device2 = new Device(-20.3431336, -40.2864437);
         AuthToken token1 = new AuthToken(device1, client1);
+        try{
+            Thread.sleep(1500);
+        }catch(InterruptedException e){
+            System.out.println("got interrupted!");
+        }
+        AuthToken token2 = new AuthToken(device2, client1);
         session.insert(client1);
         session.insert(device1);
+        session.insert(device2);
         session.insert(token1);
+        session.insert(token2);
 
         LOG.info("Final checks");
 

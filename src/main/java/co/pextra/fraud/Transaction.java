@@ -17,6 +17,8 @@ public class Transaction implements Serializable {
     private Client client;
     private Double amount;
     private Location location;
+
+    public Transaction () {}
     
     public Transaction(Client client, Double amount, Location location) {
         this.client = client;
