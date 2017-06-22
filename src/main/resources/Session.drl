@@ -1,0 +1,28 @@
+package co.pextra.fraud;
+
+import java.util.List;
+
+
+import br.ufes.inf.lprm.scene.model.Situation;
+import br.ufes.inf.lprm.situation.bindings.*;
+import br.ufes.inf.lprm.situation.model.Participation;
+import br.ufes.inf.lprm.situation.model.SituationType
+import br.ufes.inf.lprm.scene.util.SituationHelper;
+
+/*
+* There is a current token binding a Client and a Device right now
+*/
+declare Session extends Situation
+  token: AuthToken @part @key
+  client: Client @part @key
+  location: Location @snapshot
+end
+rule Session @role(situation) @type(Session)
+  when
+    client: Client()
+    device: Device(location: currentLocation)
+    token: AuthToken(this.client == client, this.device == device)
+  then
+    SituationHelper.situationDetected(drools);
+end
+
