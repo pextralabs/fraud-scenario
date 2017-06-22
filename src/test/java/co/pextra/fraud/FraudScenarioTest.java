@@ -3,7 +3,9 @@ package co.pextra.fraud;
 import br.ufes.inf.lprm.scene.SceneApplication;
 import br.ufes.inf.lprm.scene.base.listeners.SCENESessionListener;
 
-// import org.apache.log4j.chainsaw.Main;
+import java.util.concurrent.TimeUnit;
+
+import org.drools.core.time.SessionPseudoClock;
 import org.junit.Test;
 import org.kie.api.KieBase;
 import org.kie.api.KieBaseConfiguration;
@@ -15,10 +17,10 @@ import org.kie.api.definition.KiePackage;
 import org.kie.api.definition.rule.Rule;
 import org.kie.api.runtime.KieContainer;
 import org.kie.api.runtime.KieSession;
-// import org.kie.api.runtime.rule.EntryPoint;
+import org.kie.api.runtime.KieSessionConfiguration;
+import org.kie.api.runtime.conf.ClockTypeOption;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 
 public class FraudScenarioTest {
     static final Logger LOG = LoggerFactory.getLogger(FraudScenarioTest.class);
@@ -37,6 +39,8 @@ public class FraudScenarioTest {
         KieBaseConfiguration config = KieServices.Factory.get().newKieBaseConfiguration();
         config.setOption(EventProcessingOption.STREAM);
         KieBase kieBase = kContainer.newKieBase(config);
+        KieSessionConfiguration pseudoConfig = KieServices.Factory.get().newKieSessionConfiguration();
+        pseudoConfig.setOption(ClockTypeOption.get("pseudo"));
 
         LOG.info("There should be rules: ");
         for ( KiePackage kp : kieBase.getKiePackages() ) {
@@ -46,7 +50,8 @@ public class FraudScenarioTest {
         }
 
         LOG.info("Creating kieSession");
-        KieSession session = kieBase.newKieSession();
+        KieSession session = kieBase.newKieSession(pseudoConfig, null);
+        SessionPseudoClock clock = session.getSessionClock();
 
         new SceneApplication("fraud-scenario", session);
 
@@ -69,13 +74,14 @@ public class FraudScenarioTest {
         AuthToken token2 = new AuthToken(device2, client1);
         session.insert(client1);
         session.insert(device1);
-        session.insert(device2);
         session.insert(token1);
+        clock.advanceTime(1, TimeUnit.HOURS);
+        session.insert(device2);
         session.insert(token2);
 
         LOG.info("Final checks");
-
         while(true);
+
 
     }
 }
