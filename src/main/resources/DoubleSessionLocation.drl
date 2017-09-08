@@ -14,7 +14,7 @@ import br.ufes.inf.lprm.scene.util.SituationHelper;
 * kilometers apart
 */
 
-/*
+
 declare DoubleSessionLocation extends Situation
   client: Client @part @key
   firstSession: Session @part
@@ -28,4 +28,4 @@ rule DoubleSessionLocation @role(situation) @type(DoubleSessionLocation)
   then
     SituationHelper.situationDetected(drools);
 end
-*/
+

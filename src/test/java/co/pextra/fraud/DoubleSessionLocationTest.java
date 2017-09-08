@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.concurrent.TimeUnit;
 
+import javassist.ClassPool;
 import org.drools.core.ClassObjectFilter;
 import org.drools.core.time.SessionPseudoClock;
 import org.junit.Test;
@@ -56,7 +57,7 @@ public class DoubleSessionLocationTest {
         KieSession session = kieBase.newKieSession(pseudoConfig, null);
         SessionPseudoClock clock = session.getSessionClock();
 
-        new SceneApplication("fraud-scenario", session);
+        new SceneApplication(ClassPool.getDefault(), session, "fraud-scenario"   );
 
         session.addEventListener(new SCENESessionListener());
 
