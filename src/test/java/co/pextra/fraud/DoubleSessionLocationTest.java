@@ -25,13 +25,12 @@ import org.kie.api.runtime.KieContainer;
 import org.kie.api.runtime.KieSession;
 import org.kie.api.runtime.KieSessionConfiguration;
 import org.kie.api.runtime.conf.ClockTypeOption;
-import org.kie.api.runtime.rule.FactHandle;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class SessionTest {
-    static final Logger LOG = LoggerFactory.getLogger(SessionTest.class);
-    @SuppressWarnings("unchecked") @Test public void test() {
+public class DoubleSessionLocationTest {
+    static final Logger LOG = LoggerFactory.getLogger(DoubleSessionLocationTest.class);
+    @Test public void test() {
         KieServices kieServices = KieServices.Factory.get();
 
         KieContainer kContainer = kieServices.getKieClasspathContainer();
@@ -44,6 +43,7 @@ public class SessionTest {
         config.setOption(EventProcessingOption.STREAM);
         KieBase kieBase = kContainer.newKieBase(config);
         FactType sessionType = kieBase.getFactType("co.pextra.fraud", "Session");
+        FactType doubleSessionLocationType = kieBase.getFactType("co.pextra.fraud", "DoubleSessionLocation");
         KieSessionConfiguration pseudoConfig = KieServices.Factory.get().newKieSessionConfiguration();
         pseudoConfig.setOption(ClockTypeOption.get("pseudo"));
 
@@ -65,23 +65,35 @@ public class SessionTest {
         Client client = new Client("client", 10);
         Device device = new Device(-20.3431336, -40.2864437);
         AuthToken token1 = new AuthToken(device, client);
-
+        
         session.insert(client);
         session.insert(device);
-        FactHandle handle = session.insert(token1);
+        session.insert(token1);
         session.fireAllRules();
+        {
+            ArrayList<Situation> situations =  getSituations(session, sessionType);
+            // Assert there is 1 situation
+            Assert.assertEquals(1, situations.size());
+        }
         
-        ArrayList<Situation> situations =  new ArrayList<Situation>((Collection<Situation>) session.getObjects(new ClassObjectFilter(sessionType.getFactClass())));
-        // Assert there is 1 situation
-        Assert.assertEquals(1, situations.size());
-        // Assert that the situation is active
-        Assert.assertTrue(situations.get(0).isActive());
-        clock.advanceTime(1, TimeUnit.HOURS);
-        session.delete (handle);
+        clock.advanceTime(1, TimeUnit.MINUTES);
+        AuthToken token2 = new AuthToken(device, client);
+        session.insert(token2);
         session.fireAllRules();
-        // Assert that the situation is not active
-        Assert.assertTrue(!situations.get(0).isActive());
-
+        {
+            ArrayList<Situation> situations = getSituations(session, sessionType, doubleSessionLocationType);
+            Assert.assertEquals(3, situations.size());
+        }
         LOG.info("Final checks");        
+    }
+    ArrayList<Situation> getSituations (KieSession session, FactType... types) {
+        ArrayList<Situation> situs = new ArrayList<Situation>();
+        for (FactType type : types) {
+            if (type != null) {
+                Collection<Situation> typeSitus = (Collection<Situation>) session.getObjects(new ClassObjectFilter(type.getFactClass()));
+                situs.addAll(typeSitus);
+            }
+        }
+        return situs;
     }
 }

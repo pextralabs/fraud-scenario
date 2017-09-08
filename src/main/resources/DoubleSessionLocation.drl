@@ -20,9 +20,7 @@ declare DoubleSessionLocation extends Situation
   firstSession: Session @part
   secondSession: Session @part
 end
-rule DoubleSessionLocation
-@role(situation)
-@type(DoubleSessionLocation)
+rule DoubleSessionLocation @role(situation) @type(DoubleSessionLocation)
   when
     client: Client()
     firstSession: Session(this.client == client)
