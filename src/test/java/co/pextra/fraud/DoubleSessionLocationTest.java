@@ -10,6 +10,7 @@ import java.util.concurrent.TimeUnit;
 
 import javassist.ClassPool;
 import org.drools.core.ClassObjectFilter;
+import org.kie.api.runtime.rule.FactHandle;
 import org.drools.core.time.SessionPseudoClock;
 import org.junit.Test;
 import org.junit.Assert;
@@ -69,14 +70,13 @@ public class DoubleSessionLocationTest {
         
         session.insert(client);
         session.insert(device);
-        session.insert(token1);
+        FactHandle handle1 = session.insert(token1);
         session.fireAllRules();
         {
             ArrayList<Situation> situations =  getSituations(session, sessionType);
             // Assert there is 1 situation
             Assert.assertEquals(1, situations.size());
         }
-        
         clock.advanceTime(1, TimeUnit.MINUTES);
         AuthToken token2 = new AuthToken(device, client);
         session.insert(token2);
@@ -84,7 +84,7 @@ public class DoubleSessionLocationTest {
         {
             ArrayList<Situation> situations = getSituations(session, sessionType, doubleSessionLocationType);
             Assert.assertEquals(3, situations.size());
-        }
+        }   
         LOG.info("Final checks");        
     }
     ArrayList<Situation> getSituations (KieSession session, FactType... types) {

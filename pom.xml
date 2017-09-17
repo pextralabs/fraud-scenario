@@ -58,7 +58,7 @@
     <dependency>
       <groupId>br.ufes.inf.lprm</groupId>
       <artifactId>scene-core</artifactId>
-      <version>0.10.4</version>
+      <version>0.10.5-rc3</version>
     </dependency>
   </dependencies>
 
