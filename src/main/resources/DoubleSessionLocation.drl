@@ -24,7 +24,7 @@ rule DoubleSessionLocation @role(situation) @type(DoubleSessionLocation)
   when
     client: Client()
     firstSession: Session(this.client == client)
-	  secondSession: Session(this.client == client, this overlappedby firstSession || this after [1h] firstSession)
+	  secondSession: Session(this.client == client, this overlaps firstSession)
   then
     SituationHelper.situationDetected(drools);
 end

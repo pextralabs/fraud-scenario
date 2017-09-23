@@ -1,0 +1,34 @@
+package co.pextra.fraud;
+
+import java.util.List;
+
+
+import br.ufes.inf.lprm.scene.model.Situation;
+import br.ufes.inf.lprm.situation.bindings.*;
+import br.ufes.inf.lprm.situation.model.Participation;
+import br.ufes.inf.lprm.situation.model.SituationType;
+import br.ufes.inf.lprm.situation.model.events.*;
+import br.ufes.inf.lprm.scene.util.SituationHelper;
+
+/*
+* There was a DoubleSessionLocation within the last hour
+*/
+declare DoubleSessionLocationWithinLastHour extends Situation
+  client: Client @part @key
+  doubleSessionLocation: DoubleSessionLocation @part
+end
+rule DoubleSessionLocationWithinLastHour @role(situation) @type(DoubleSessionLocationWithinLastHour)
+  when
+    client: Client()
+    doubleSessionLocation: DoubleSessionLocation(this.client == client)
+    (
+      DoubleSessionLocation(this == doubleSessionLocation, active) or
+       (
+         DoubleSessionLocation(this == doubleSessionLocation, !active) and
+         Deactivation(situation==doubleSessionLocation) over window:time(1h)
+        )
+    )
+  then
+    SituationHelper.situationDetected(drools);
+end
+

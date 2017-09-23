@@ -32,7 +32,8 @@ import org.slf4j.LoggerFactory;
 
 public class SessionTest {
     static final Logger LOG = LoggerFactory.getLogger(SessionTest.class);
-    @SuppressWarnings("unchecked") @Test public void test() {
+    @SuppressWarnings("unchecked")
+    public void test() {
         KieServices kieServices = KieServices.Factory.get();
 
         KieContainer kContainer = kieServices.getKieClasspathContainer();

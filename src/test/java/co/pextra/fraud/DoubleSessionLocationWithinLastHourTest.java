@@ -30,8 +30,9 @@ import org.kie.api.runtime.conf.ClockTypeOption;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class DoubleSessionLocationTest {
-    static final Logger LOG = LoggerFactory.getLogger(DoubleSessionLocationTest.class);
+public class DoubleSessionLocationWithinLastHourTest {
+    static final Logger LOG = LoggerFactory.getLogger(DoubleSessionLocationWithinLastHourTest.class);
+    @Test
     public void test() {
         KieServices kieServices = KieServices.Factory.get();
 
@@ -46,6 +47,7 @@ public class DoubleSessionLocationTest {
         KieBase kieBase = kContainer.newKieBase(config);
         FactType sessionType = kieBase.getFactType("co.pextra.fraud", "Session");
         FactType doubleSessionLocationType = kieBase.getFactType("co.pextra.fraud", "DoubleSessionLocation");
+        FactType doubleSessionLocationWithinLastHourType = kieBase.getFactType("co.pextra.Fraud", "DoubleSessionLocationWithinLastHour");
         KieSessionConfiguration pseudoConfig = KieServices.Factory.get().newKieSessionConfiguration();
         pseudoConfig.setOption(ClockTypeOption.get("pseudo"));
 
@@ -63,7 +65,6 @@ public class DoubleSessionLocationTest {
         session.addEventListener(new SCENESessionListener());
 
         LOG.info("Now running data");
-
         Client client = new Client("client", 10);
         Device device = new Device(-20.3431336, -40.2864437);
         AuthToken token1 = new AuthToken(device, client);
@@ -82,9 +83,9 @@ public class DoubleSessionLocationTest {
         session.insert(token2);
         session.fireAllRules();
         {
-            ArrayList<Situation> situations = getSituations(session, sessionType, doubleSessionLocationType);
-            Assert.assertEquals(3, situations.size());
-        }   
+            ArrayList<Situation> situations = getSituations(session, sessionType, doubleSessionLocationType, doubleSessionLocationWithinLastHourType);
+            Assert.assertEquals(4, situations.size());
+        }  
         LOG.info("Final checks");
     }
     ArrayList<Situation> getSituations (KieSession session, FactType... types) {
