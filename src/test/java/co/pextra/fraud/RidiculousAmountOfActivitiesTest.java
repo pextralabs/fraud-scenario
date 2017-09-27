@@ -30,9 +30,9 @@ import org.kie.api.runtime.conf.ClockTypeOption;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class DoubleSessionLocationTest {
-    static final Logger LOG = LoggerFactory.getLogger(DoubleSessionLocationTest.class);
-    // @Test
+public class RidiculousAmountOfActivitiesTest {
+    static final Logger LOG = LoggerFactory.getLogger(RidiculousAmountOfActivitiesTest.class);
+    @Test
     public void test() {
         KieServices kieServices = KieServices.Factory.get();
 
@@ -46,7 +46,7 @@ public class DoubleSessionLocationTest {
         config.setOption(EventProcessingOption.STREAM);
         KieBase kieBase = kContainer.newKieBase(config);
         FactType sessionType = kieBase.getFactType("co.pextra.fraud", "Session");
-        FactType doubleSessionLocationType = kieBase.getFactType("co.pextra.fraud", "DoubleSessionLocation");
+        FactType ridiculousAmountOfActivitiesType = kieBase.getFactType("co.pextra.fraud", "RidiculousAmountOfActivities");
         KieSessionConfiguration pseudoConfig = KieServices.Factory.get().newKieSessionConfiguration();
         pseudoConfig.setOption(ClockTypeOption.get("pseudo"));
 
@@ -57,7 +57,7 @@ public class DoubleSessionLocationTest {
 
         LOG.info("Creating kieSession");
         KieSession session = kieBase.newKieSession(pseudoConfig, null);
-        SessionPseudoClock clock = session.getSessionClock();
+        // SessionPseudoClock clock = session.getSessionClock();
 
         new SceneApplication(ClassPool.getDefault(), session, "fraud-scenario"   );
 
@@ -74,22 +74,10 @@ public class DoubleSessionLocationTest {
         session.insert(token1);
         session.fireAllRules();
         {
-            ArrayList<Situation> situations =  getSituations(session, sessionType);
+            ArrayList<Situation> situations =  getSituations(session, sessionType, ridiculousAmountOfActivitiesType);
             // Assert there is 1 situation
             Assert.assertEquals(1, situations.size());
         }
-        clock.advanceTime(1, TimeUnit.MINUTES);
-        Device device2 = new Device(-20.2976178, -40.2957768);
-        //lat -20.2976178
-        //long -40.2957768
-        AuthToken token2 = new AuthToken(device2, client);
-        session.insert(device2);
-        session.insert(token2);
-        session.fireAllRules();
-        {
-            ArrayList<Situation> situations = getSituations(session, sessionType, doubleSessionLocationType);
-            Assert.assertEquals(3, situations.size());
-        }   
         LOG.info("Final checks");
     }
     ArrayList<Situation> getSituations (KieSession session, FactType... types) {

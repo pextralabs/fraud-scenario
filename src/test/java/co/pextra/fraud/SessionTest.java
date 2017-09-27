@@ -33,6 +33,7 @@ import org.slf4j.LoggerFactory;
 public class SessionTest {
     static final Logger LOG = LoggerFactory.getLogger(SessionTest.class);
     @SuppressWarnings("unchecked")
+    // @Test
     public void test() {
         KieServices kieServices = KieServices.Factory.get();
 
@@ -83,7 +84,6 @@ public class SessionTest {
         session.fireAllRules();
         // Assert that the situation is not active
         Assert.assertTrue(!situations.get(0).isActive());
-
-        LOG.info("Final checks");        
+        LOG.info("Final checks");
     }
 }

@@ -1,0 +1,35 @@
+package co.pextra.fraud;
+
+import java.util.List;
+
+
+import br.ufes.inf.lprm.scene.model.Situation;
+import br.ufes.inf.lprm.situation.bindings.*;
+import br.ufes.inf.lprm.situation.model.Participation;
+import br.ufes.inf.lprm.situation.model.SituationType
+import br.ufes.inf.lprm.scene.util.SituationHelper;
+
+/*
+* There were two Sessions within the last hour in locations with more than 10000
+* kilometers apart
+*/
+declare RidiculousAmountOfActivities extends Situation
+  client: Client @part @key
+  transactions: List @part
+end
+rule RidiculousAmountOfActivities @role(situation) @type(RidiculousAmountOfActivities)
+  when
+    client: Client()
+    accumulate(
+      t1: Transaction(this.client == client) over window:time(7d),
+      weekAmount: count(t1),
+      transactions: collectList(t1)
+    )
+    accumulate(
+      t2: Transaction(this.client == client) over window:time(30d),
+      monthAmount: count(t2) - weekAmount
+    )
+  then
+    SituationHelper.situationDetected(drools);
+end
+

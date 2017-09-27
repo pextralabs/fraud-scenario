@@ -23,10 +23,10 @@ rule DoubleSessionLocationWithinLastHour @role(situation) @type(DoubleSessionLoc
     doubleSessionLocation: DoubleSessionLocation(this.client == client)
     (
       DoubleSessionLocation(this == doubleSessionLocation, active) or
-       (
+      (
          DoubleSessionLocation(this == doubleSessionLocation, !active) and
          Deactivation(situation==doubleSessionLocation) over window:time(1h)
-        )
+      )
     )
   then
     SituationHelper.situationDetected(drools);

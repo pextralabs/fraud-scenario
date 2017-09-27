@@ -32,7 +32,7 @@ public class Location {
 		this.latitude = latitude;
 	}
 	
-	public boolean Near(Location loc, Double distance) {
+	public boolean near(Location loc, Double distance) {
 	  Double earthRadius = (6.37814)*Math.pow(10, 6); //earth radius in meters	  
 	  Double dLat = Math.toRadians(loc.getLatitude() 	- this.getLatitude() );
 	  Double dLng = Math.toRadians(loc.getLongitude() - this.getLongitude());

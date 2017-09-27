@@ -5,6 +5,7 @@ import br.ufes.inf.lprm.scene.base.listeners.SCENESessionListener;
 import br.ufes.inf.lprm.situation.model.Situation;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.concurrent.TimeUnit;
 
@@ -32,7 +33,7 @@ import org.slf4j.LoggerFactory;
 
 public class DoubleSessionLocationWithinLastHourTest {
     static final Logger LOG = LoggerFactory.getLogger(DoubleSessionLocationWithinLastHourTest.class);
-    @Test
+    // @Test
     public void test() {
         KieServices kieServices = KieServices.Factory.get();
 
@@ -47,7 +48,7 @@ public class DoubleSessionLocationWithinLastHourTest {
         KieBase kieBase = kContainer.newKieBase(config);
         FactType sessionType = kieBase.getFactType("co.pextra.fraud", "Session");
         FactType doubleSessionLocationType = kieBase.getFactType("co.pextra.fraud", "DoubleSessionLocation");
-        FactType doubleSessionLocationWithinLastHourType = kieBase.getFactType("co.pextra.Fraud", "DoubleSessionLocationWithinLastHour");
+        FactType doubleSessionLocationWithinLastHourType = kieBase.getFactType("co.pextra.fraud", "DoubleSessionLocationWithinLastHour");
         KieSessionConfiguration pseudoConfig = KieServices.Factory.get().newKieSessionConfiguration();
         pseudoConfig.setOption(ClockTypeOption.get("pseudo"));
 
@@ -77,6 +78,9 @@ public class DoubleSessionLocationWithinLastHourTest {
             ArrayList<Situation> situations =  getSituations(session, sessionType);
             // Assert there is 1 situation
             Assert.assertEquals(1, situations.size());
+            ArrayList<Situation> actives = new ArrayList<Situation>();
+            for (Situation situ : situations) if (situ.isActive()) actives.add(situ);
+            Assert.assertEquals(1, actives.size());
         }
         clock.advanceTime(1, TimeUnit.MINUTES);
         AuthToken token2 = new AuthToken(device, client);
@@ -85,7 +89,28 @@ public class DoubleSessionLocationWithinLastHourTest {
         {
             ArrayList<Situation> situations = getSituations(session, sessionType, doubleSessionLocationType, doubleSessionLocationWithinLastHourType);
             Assert.assertEquals(4, situations.size());
-        }  
+            ArrayList<Situation> actives = new ArrayList<Situation>();
+            for (Situation situ : situations) if (situ.isActive()) actives.add(situ);
+            Assert.assertEquals(4, actives.size());
+        }
+        session.delete(handle1);
+        session.fireAllRules();
+        {
+            ArrayList<Situation> situations = getSituations(session, sessionType, doubleSessionLocationType, doubleSessionLocationWithinLastHourType);
+            Assert.assertEquals(4, situations.size());
+            ArrayList<Situation> actives = new ArrayList<Situation>();
+            for (Situation situ : situations) if (situ.isActive()) actives.add(situ);
+            Assert.assertEquals(2, actives.size());
+        }
+        clock.advanceTime(1, TimeUnit.HOURS);
+        session.fireAllRules();
+        {
+            ArrayList<Situation> situations = getSituations(session, sessionType, doubleSessionLocationType, doubleSessionLocationWithinLastHourType);
+            Assert.assertEquals(4, situations.size());
+            ArrayList<Situation> actives = new ArrayList<Situation>();
+            for (Situation situ : situations) if (situ.isActive()) actives.add(situ);
+            Assert.assertEquals(1, actives.size());
+        }
         LOG.info("Final checks");
     }
     ArrayList<Situation> getSituations (KieSession session, FactType... types) {
