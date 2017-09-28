@@ -25,11 +25,10 @@ rule RidiculousAmountOfActivities @role(situation) @type(RidiculousAmountOfActiv
       weekAmount: count(t1),
       transactions: collectList(t1)
     )
-    accumulate(
-      t2: Transaction(this.client == client) over window:time(30d),
-      monthAmount: count(t2) - weekAmount
+    Long( longValue - weekAmount > weekAmount ) from accumulate(
+      t2: Transaction(this.client == client) over window:time(37d),
+      count(t2)
     )
   then
     SituationHelper.situationDetected(drools);
 end
-
