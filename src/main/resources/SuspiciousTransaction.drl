@@ -1,0 +1,26 @@
+package co.pextra.fraud;
+
+import java.util.List;
+
+
+import br.ufes.inf.lprm.scene.model.Situation;
+import br.ufes.inf.lprm.situation.bindings.*;
+import br.ufes.inf.lprm.situation.model.Participation;
+import br.ufes.inf.lprm.situation.model.SituationType
+import br.ufes.inf.lprm.scene.util.SituationHelper;
+
+declare SuspiciousTransaction extends Situation
+    doubleSessionLocation: DoubleSessionLocationWithinLastHour @part @key
+    transactions: List @part
+end
+rule SuspiciousTransaction @role(situation) @type(SuspiciousTransaction)
+  when
+    client: Client()
+    doubleSessionLocation: DoubleSessionLocationWithinLastHour(active, this.client == client)
+    transactions: List(size > 0) from accumulate(
+        transaction: Transaction(this.client == client) over window:time(1h),
+        collectList(transaction)
+    )
+  then
+    SituationHelper.situationDetected(drools);
+end

@@ -33,7 +33,7 @@ import org.slf4j.LoggerFactory;
 
 public class DoubleSessionLocationWithinLastHourTest {
     static final Logger LOG = LoggerFactory.getLogger(DoubleSessionLocationWithinLastHourTest.class);
-    // @Test
+    @Test
     public void test() {
         KieServices kieServices = KieServices.Factory.get();
 
@@ -113,7 +113,8 @@ public class DoubleSessionLocationWithinLastHourTest {
         }
         LOG.info("Final checks");
     }
-    ArrayList<Situation> getSituations (KieSession session, FactType... types) {
+    @SuppressWarnings("unchecked")
+	ArrayList<Situation> getSituations (KieSession session, FactType... types) {
         ArrayList<Situation> situs = new ArrayList<Situation>();
         for (FactType type : types) {
             if (type != null) {

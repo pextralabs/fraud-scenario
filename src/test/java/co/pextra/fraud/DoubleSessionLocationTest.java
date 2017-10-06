@@ -32,7 +32,7 @@ import org.slf4j.LoggerFactory;
 
 public class DoubleSessionLocationTest {
     static final Logger LOG = LoggerFactory.getLogger(DoubleSessionLocationTest.class);
-    // @Test
+    @Test
     public void test() {
         KieServices kieServices = KieServices.Factory.get();
 
@@ -79,9 +79,7 @@ public class DoubleSessionLocationTest {
             Assert.assertEquals(1, situations.size());
         }
         clock.advanceTime(1, TimeUnit.MINUTES);
-        Device device2 = new Device(-20.2976178, -40.2957768);
-        //lat -20.2976178
-        //long -40.2957768
+        Device device2 = new Device(-20.4831336, -40.2864437);
         AuthToken token2 = new AuthToken(device2, client);
         session.insert(device2);
         session.insert(token2);
@@ -89,10 +87,11 @@ public class DoubleSessionLocationTest {
         {
             ArrayList<Situation> situations = getSituations(session, sessionType, doubleSessionLocationType);
             Assert.assertEquals(3, situations.size());
-        }   
+        }
         LOG.info("Final checks");
     }
-    ArrayList<Situation> getSituations (KieSession session, FactType... types) {
+    @SuppressWarnings("unchecked")
+	ArrayList<Situation> getSituations (KieSession session, FactType... types) {
         ArrayList<Situation> situs = new ArrayList<Situation>();
         for (FactType type : types) {
             if (type != null) {

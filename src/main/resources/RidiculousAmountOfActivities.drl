@@ -25,7 +25,7 @@ rule RidiculousAmountOfActivities @role(situation) @type(RidiculousAmountOfActiv
       weekAmount: count(t1),
       transactions: collectList(t1)
     )
-    Long( longValue - weekAmount > weekAmount ) from accumulate(
+    Long( longValue - weekAmount < weekAmount && longValue > 5 ) from accumulate(
       t2: Transaction(this.client == client) over window:time(37d),
       count(t2)
     )

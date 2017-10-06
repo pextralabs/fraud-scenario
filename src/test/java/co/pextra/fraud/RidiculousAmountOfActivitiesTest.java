@@ -4,6 +4,7 @@ import br.ufes.inf.lprm.scene.SceneApplication;
 import br.ufes.inf.lprm.scene.base.listeners.SCENESessionListener;
 import br.ufes.inf.lprm.situation.model.Situation;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.concurrent.TimeUnit;
@@ -57,7 +58,7 @@ public class RidiculousAmountOfActivitiesTest {
 
         LOG.info("Creating kieSession");
         KieSession session = kieBase.newKieSession(pseudoConfig, null);
-        // SessionPseudoClock clock = session.getSessionClock();
+        SessionPseudoClock clock = session.getSessionClock();
 
         new SceneApplication(ClassPool.getDefault(), session, "fraud-scenario"   );
 
@@ -78,16 +79,34 @@ public class RidiculousAmountOfActivitiesTest {
             // Assert there is 1 situation
             Assert.assertEquals(1, situations.size());
         }
+        Location vix = new Location(-20.3831336, -40.2864437);
+        ArrayList<Transaction> transactions = new ArrayList<Transaction>();
+        transactions.add(new Transaction(client, 10.0, vix));
+        transactions.add(new Transaction(client, 10.0, vix));
+        transactions.add(new Transaction(client, 10.0, vix));
+        transactions.add(new Transaction(client, 10.0, vix));
+        transactions.add(new Transaction(client, 10.0, vix));
+        transactions.add(new Transaction(client, 10.0, vix));
+        for (Transaction transaction : transactions) {
+            session.insert(transaction);
+        }
+//        clock.advanceTime(20, TimeUnit.DAYS);
+        session.fireAllRules();
+        {
+            ArrayList<Situation> situations =  getSituations(session, sessionType, ridiculousAmountOfActivitiesType);
+            // Assert there is 1 situation
+            Assert.assertEquals(2, situations.size());
+        }
         LOG.info("Final checks");
     }
-    ArrayList<Situation> getSituations (KieSession session, FactType... types) {
-        ArrayList<Situation> situs = new ArrayList<Situation>();
+    private  ArrayList<Situation> getSituations (KieSession session, FactType... types) {
+        ArrayList<Situation> situations = new ArrayList<Situation>();
         for (FactType type : types) {
             if (type != null) {
-                Collection<Situation> typeSitus = (Collection<Situation>) session.getObjects(new ClassObjectFilter(type.getFactClass()));
-                situs.addAll(typeSitus);
+                Collection<Situation> typeSituations = (Collection<Situation>) session.getObjects(new ClassObjectFilter(type.getFactClass()));
+                situations.addAll(typeSituations);
             }
         }
-        return situs;
+        return situations;
     }
 }
