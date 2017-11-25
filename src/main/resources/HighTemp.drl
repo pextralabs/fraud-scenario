@@ -1,0 +1,24 @@
+//package container;
+//
+//import br.ufes.inf.lprm.scene.model.Situation;
+//import br.ufes.inf.lprm.situation.bindings.*;
+//import br.ufes.inf.lprm.situation.model.Participation;
+//import br.ufes.inf.lprm.situation.model.SituationType
+//import br.ufes.inf.lprm.scene.util.SituationHelper;
+
+/*
+* There is a current token binding a Client and a Device right now
+//*/
+//declare HighTemp extends Situation
+//  container: Container
+//  temperature: Temperature @snapshot
+//end
+//rule HighTemp @role(situation) @type(Session)
+//  when
+//    container: Container(
+//        temperature: temperature.value > 36
+//    )
+//  then
+//    SituationHelper.situationDetected(drools);
+//end
+
