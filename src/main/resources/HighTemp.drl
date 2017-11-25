@@ -1,24 +1,35 @@
-//package container;
-//
-//import br.ufes.inf.lprm.scene.model.Situation;
-//import br.ufes.inf.lprm.situation.bindings.*;
-//import br.ufes.inf.lprm.situation.model.Participation;
-//import br.ufes.inf.lprm.situation.model.SituationType
-//import br.ufes.inf.lprm.scene.util.SituationHelper;
+package pharmaceutical;
+
+import br.ufes.inf.lprm.scene.model.Situation;
+import br.ufes.inf.lprm.situation.bindings.*;
+import br.ufes.inf.lprm.situation.model.Participation;
+import br.ufes.inf.lprm.situation.model.SituationType
+import br.ufes.inf.lprm.scene.util.SituationHelper;
 
 /*
 * There is a current token binding a Client and a Device right now
-//*/
+*/
 //declare HighTemp extends Situation
-//  container: Container
-//  temperature: Temperature @snapshot
+//    container: Container @key @part(label="$container")
+//    batch: Batch @key @part
 //end
-//rule HighTemp @role(situation) @type(Session)
+//rule HighTemp @role(situation) @type(HighTemp)
 //  when
-//    container: Container(
-//        temperature: temperature.value > 36
-//    )
+//    $container: Container()
+//    batch: Batch(container == $container, $container.temperature.lastValue.value > productType.maxTemp)
 //  then
 //    SituationHelper.situationDetected(drools);
 //end
 
+declare HighTemp extends Situation
+    container: Container @key @part(label="$container")
+    batch: Batch @key @part
+end
+rule HighTemp @role(situation) @type(HighTemp)
+  when
+    $temperature: Temperature()
+    $container: Container(temperature == $temperature )
+    batch: Batch(container == $container, $temperature.lastValue.value > productType.maxTemp)
+  then
+    SituationHelper.situationDetected(drools);
+end

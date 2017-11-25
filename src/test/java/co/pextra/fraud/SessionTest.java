@@ -31,7 +31,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class SessionTest {
-    static final Logger LOG = LoggerFactory.getLogger(SessionTest.class);
+    static private final Logger LOG = LoggerFactory.getLogger(SessionTest.class);
     @SuppressWarnings("unchecked")
     @Test
     public void test() {

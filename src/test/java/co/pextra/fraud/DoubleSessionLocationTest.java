@@ -31,7 +31,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class DoubleSessionLocationTest {
-    static final Logger LOG = LoggerFactory.getLogger(DoubleSessionLocationTest.class);
+    static private final Logger LOG = LoggerFactory.getLogger(DoubleSessionLocationTest.class);
     @Test
     public void test() {
         KieServices kieServices = KieServices.Factory.get();

@@ -1,20 +1,13 @@
-package co.pextra.fraud;
+package pharmaceutical;
 
 import br.ufes.inf.lprm.scene.SceneApplication;
 import br.ufes.inf.lprm.scene.base.listeners.SCENESessionListener;
 import br.ufes.inf.lprm.situation.model.Situation;
-
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.concurrent.TimeUnit;
-
+import co.pextra.fraud.Location;
 import javassist.ClassPool;
 import org.drools.core.ClassObjectFilter;
-import org.kie.api.runtime.rule.FactHandle;
 import org.drools.core.time.SessionPseudoClock;
 import org.junit.Test;
-import org.junit.Assert;
 import org.kie.api.KieBase;
 import org.kie.api.KieBaseConfiguration;
 import org.kie.api.KieServices;
@@ -28,11 +21,17 @@ import org.kie.api.runtime.KieContainer;
 import org.kie.api.runtime.KieSession;
 import org.kie.api.runtime.KieSessionConfiguration;
 import org.kie.api.runtime.conf.ClockTypeOption;
+import org.kie.api.runtime.rule.FactHandle;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class RidiculousAmountOfActivitiesTest {
-    static private final Logger LOG = LoggerFactory.getLogger(RidiculousAmountOfActivitiesTest.class);
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.concurrent.TimeUnit;
+
+public class TemperatureTest {
+    static final Logger LOG = LoggerFactory.getLogger(TemperatureTest.class);
+    @SuppressWarnings("unchecked")
     @Test
     public void test() {
         KieServices kieServices = KieServices.Factory.get();
@@ -46,8 +45,7 @@ public class RidiculousAmountOfActivitiesTest {
         KieBaseConfiguration config = KieServices.Factory.get().newKieBaseConfiguration();
         config.setOption(EventProcessingOption.STREAM);
         KieBase kieBase = kContainer.newKieBase(config);
-        FactType sessionType = kieBase.getFactType("co.pextra.fraud", "Session");
-        FactType ridiculousAmountOfActivitiesType = kieBase.getFactType("co.pextra.fraud", "RidiculousAmountOfActivities");
+        FactType highTempType = kieBase.getFactType("container", "HighTemp");
         KieSessionConfiguration pseudoConfig = KieServices.Factory.get().newKieSessionConfiguration();
         pseudoConfig.setOption(ClockTypeOption.get("pseudo"));
 
@@ -60,46 +58,39 @@ public class RidiculousAmountOfActivitiesTest {
         KieSession session = kieBase.newKieSession(pseudoConfig, null);
         SessionPseudoClock clock = session.getSessionClock();
 
-        new SceneApplication(ClassPool.getDefault(), session, "fraud-scenario"   );
+        new SceneApplication(ClassPool.getDefault(), session, "fraud-scenario");
 
         session.addEventListener(new SCENESessionListener());
 
         LOG.info("Now running data");
+        Doctor doctor = new Doctor(new Location(-20.2976180, -40.2957770));
+        Container container = new Container(25, doctor);
+        ProdType vaccine = new ProdType("vaccine", 36);
+        Batch vaccinesBatch = new Batch(vaccine, container);
 
-        Client client = new Client("client", 10);
-        Device device = new Device(-20.3831336, -40.2864437);
-        AuthToken token1 = new AuthToken(device, client);
-        
-        session.insert(client);
-        session.insert(device);
-        session.insert(token1);
+        session.insert(doctor);
+        FactHandle containerFact = session.insert(container);
+        session.insert(vaccine);
+        session.insert(vaccinesBatch);
+
         session.fireAllRules();
-        {
-            ArrayList<Situation> situations =  getSituations(session, sessionType, ridiculousAmountOfActivitiesType);
-            // Assert there is 1 situation
-            Assert.assertEquals(1, situations.size());
-        }
-        Location vix = new Location(-20.3831336, -40.2864437);
-        ArrayList<Transaction> transactions = new ArrayList<Transaction>();
-        transactions.add(new Transaction(client, 10.0, vix));
-        transactions.add(new Transaction(client, 10.0, vix));
-        transactions.add(new Transaction(client, 10.0, vix));
-        transactions.add(new Transaction(client, 10.0, vix));
-        transactions.add(new Transaction(client, 10.0, vix));
-        transactions.add(new Transaction(client, 10.0, vix));
-        for (Transaction transaction : transactions) {
-            session.insert(transaction);
-        }
-//        clock.advanceTime(20, TimeUnit.DAYS);
+
+        container.getTemperature().setLastValue(new SensorReading(37));
+        session.update(containerFact, container);
         session.fireAllRules();
-        {
-            ArrayList<Situation> situations =  getSituations(session, sessionType, ridiculousAmountOfActivitiesType);
-            // Assert there is 1 situation
-            Assert.assertEquals(2, situations.size());
-        }
-        LOG.info("Final checks");
+
+        clock.advanceTime(2, TimeUnit.MINUTES);
+
+        container.getTemperature().setLastValue(new SensorReading(34));
+        session.update(containerFact, container);
+        session.fireAllRules();
+        clock.advanceTime(2, TimeUnit.MINUTES);
+
+        container.getTemperature().setLastValue(new SensorReading(37));
+        session.update(containerFact, container);
+        session.fireAllRules();
     }
-    private  ArrayList<Situation> getSituations (KieSession session, FactType... types) {
+    private ArrayList<Situation> getSituations (KieSession session, FactType... types) {
         ArrayList<Situation> situations = new ArrayList<Situation>();
         for (FactType type : types) {
             if (type != null) {
